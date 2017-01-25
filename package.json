@@ -1,0 +1,14 @@
+{
+  "name": "projekt_k2",
+  "version": "1.0.0",
+  "description": "Projekt rekrutacyjny do działu WebDev K2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "K2"
+  ],
+  "author": "Michał Milanowski",
+  "license": "ISC"
+}
