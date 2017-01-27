@@ -10,5 +10,8 @@
     "K2"
   ],
   "author": "Michał Milanowski",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
