@@ -6,6 +6,9 @@ const gulp = require('gulp');
 // Wtyczki GULP
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
+const fs = require('fs');
+const tinypng = require('gulp-tinypng');
+const clean = require('gulp-clean');
 
 // Kompilacja SASS
 gulp.task('sass', function () {
@@ -33,4 +36,17 @@ gulp.task('default', ['sass', 'watch']);
 gulp.task('css-move', function () {
     return gulp.src('src/css/**/*')
         .pipe(gulp.dest('dist/css'));
+});
+
+// Kompresja obrazów za pomocą API tinypng.com
+gulp.task('tinypng', function () {
+    let apiKey = fs.readFileSync('dependencies/tinypng_api_key.txt', 'utf8');
+    return gulp.src('src/img/**/*')
+        .pipe(tinypng(apiKey))
+        .pipe(gulp.dest('dist/img')).on('end', function () {
+            return gulp.src('.gulp', {
+                    read: false
+                })
+                .pipe(clean());
+        });
 });

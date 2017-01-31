@@ -6,3 +6,6 @@ src/css/
 
 # dist directory
 dist/
+
+# dependencies directory (for example API Keys)
+dependencies/
