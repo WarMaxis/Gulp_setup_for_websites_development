@@ -1,9 +1,11 @@
 'use strict';
 
 // Kolorowanie wiadomości konsolowych
-const redFont = '\x1b[31m%s\x1b[0m';
-const greenFont = '\x1b[32m%s\x1b[0m';
-const yellowFont = '\x1b[33m%s\x1b[0m';
+const fontColors = {
+    red: '\x1b[31m%s\x1b[0m',
+    green: '\x1b[32m%s\x1b[0m',
+    yellow: '\x1b[33m%s\x1b[0m'
+};
 
 // Inicjalizacja GULP
 const gulp = require('gulp');
@@ -22,7 +24,7 @@ gulp.task('sass', function () {
         .pipe(sass({
             outputStyle: 'compressed'
         }).on('error', sass.logError).on('end', function () {
-            console.log(greenFont, '\nKompilacja SASS do CSS zakończona\n');
+            console.log(fontColors.green, '\nKompilacja SASS do CSS zakończona\n');
         }))
         .pipe(sourcemaps.write(''))
         .pipe(gulp.dest('src/css'));
