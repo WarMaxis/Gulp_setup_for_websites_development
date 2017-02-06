@@ -9,3 +9,7 @@ dist/
 
 # dependencies directory (for example API Keys)
 dependencies/
+
+# Main .js file in src directory
+src/js/app.js
+src/js/app.js.map

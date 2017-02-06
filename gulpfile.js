@@ -17,6 +17,11 @@ const fs = require('fs');
 const tinypng = require('gulp-tinypng');
 const clean = require('gulp-clean');
 const htmlmin = require('gulp-htmlmin');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const uglify = require('gulp-uglify');
+
 
 // Kompilacja SASS
 gulp.task('sass', function () {
@@ -70,4 +75,29 @@ gulp.task('tinypng', function () {
                 })
                 .pipe(clean());
         });
+});
+
+// Browserify + minifikacja plików .js
+gulp.task('javascript', function () {
+    let browserifyConfig = browserify({
+        entries: './src/js/main.js',
+        debug: true
+    });
+
+    return browserifyConfig.bundle()
+        .pipe(source('app.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({
+            loadMaps: true
+        }))
+        .pipe(uglify().on('end', function () {
+            console.log(fontColors.green, '\nŁączenie i minifikacja plików JavaScript zakończona\n');
+        }))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./src/js/'));
+});
+
+// Watcher plików .js
+gulp.task('watch-js', function () {
+    gulp.watch(['src/js/**/*.js', '!src/js/app.js'], ['javascript']);
 });
