@@ -16,6 +16,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const fs = require('fs');
 const tinypng = require('gulp-tinypng');
 const clean = require('gulp-clean');
+const htmlmin = require('gulp-htmlmin');
 
 // Kompilacja SASS
 gulp.task('sass', function () {
@@ -42,7 +43,20 @@ gulp.task('default', ['sass', 'watch']);
 // Kopiowanie plików CSS do folderu produkcyjnego
 gulp.task('css-move', function () {
     return gulp.src('src/css/**/*')
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('dist/css').on('end', function () {
+            console.log(fontColors.green, '\nPrzenoszenie plików CSS zakończone\n');
+        }));
+});
+
+// Kopiowanie i minifikacja plików HTML
+gulp.task('html-move', function () {
+    return gulp.src('src/**/*.html')
+        .pipe(htmlmin({
+            collapseWhitespace: true
+        }))
+        .pipe(gulp.dest('dist').on('end', function () {
+            console.log(fontColors.green, '\nMinifikacja i przenoszenie plików HTML zakończona\n');
+        }));
 });
 
 // Kompresja obrazów za pomocą API tinypng.com
