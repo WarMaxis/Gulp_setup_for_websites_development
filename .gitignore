@@ -11,5 +11,5 @@ dist/
 dependencies/
 
 # Main .js file in src directory
-src/js/app.js
-src/js/app.js.map
+src/js/scripts.min.js
+src/js/scripts.min.js.map
