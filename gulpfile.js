@@ -151,5 +151,4 @@ gulp.task('ftp', function () {
         .pipe(connect.dest(hostDirectoryData).on('end', function () {
             console.log(fontColors.yellow, '\nKopiowanie plików na serwer FTP zakończone\n');
         }));
-
 });
