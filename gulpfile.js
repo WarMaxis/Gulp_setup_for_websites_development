@@ -32,6 +32,7 @@ const buffer = require('vinyl-buffer');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const ftp = require('vinyl-ftp');
+const autoprefixer = require('gulp-autoprefixer');
 
 // Kompilacja SASS
 gulp.task('sass', function () {
@@ -41,6 +42,10 @@ gulp.task('sass', function () {
             outputStyle: 'compressed'
         }).on('error', sass.logError).on('end', function () {
             console.log(fontColors.green, '\nKompilacja SASS do CSS zakończona\n');
+        }))
+        .pipe(autoprefixer({
+            browsers: ['last 10 versions'],
+            cascade: false
         }))
         .pipe(rename(outputFileNames.cssFile))
         .pipe(sourcemaps.write(''))
