@@ -20,19 +20,20 @@ const prodDirectory = 'dist/**/*';
 const gulp = require('gulp');
 
 // Wtyczki GULP
-const sass = require('gulp-sass');
-const sourcemaps = require('gulp-sourcemaps');
-const fs = require('fs');
-const tinypng = require('gulp-tinypng');
-const clean = require('gulp-clean');
-const htmlmin = require('gulp-htmlmin');
-const browserify = require('browserify');
-const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
-const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
-const ftp = require('vinyl-ftp');
-const autoprefixer = require('gulp-autoprefixer');
+const
+    sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
+    fs = require('fs'),
+    tinypng = require('gulp-tinypng'),
+    clean = require('gulp-clean'),
+    htmlmin = require('gulp-htmlmin'),
+    browserify = require('browserify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    uglify = require('gulp-uglify'),
+    rename = require('gulp-rename'),
+    ftp = require('vinyl-ftp'),
+    autoprefixer = require('gulp-autoprefixer');
 
 // Kompilacja SASS
 gulp.task('sass', function () {
@@ -41,7 +42,7 @@ gulp.task('sass', function () {
         .pipe(sass({
             outputStyle: 'compressed'
         }).on('error', sass.logError).on('end', function () {
-            console.log(fontColors.green, '\nKompilacja SASS do CSS zakończona\n');
+            console.log(fontColors.green, '\n✔ Kompilacja SASS do CSS zakończona\n');
         }))
         .pipe(autoprefixer({
             browsers: ['last 10 versions'],
@@ -64,7 +65,7 @@ gulp.task('default', ['sass', 'watch', 'javascript', 'watch-js']);
 gulp.task('css-move', function () {
     return gulp.src('src/css/**/*')
         .pipe(gulp.dest('dist/css').on('end', function () {
-            console.log(fontColors.green, '\nPrzenoszenie plików CSS zakończone\n');
+            console.log(fontColors.green, '\n✔ Przenoszenie plików CSS zakończone\n');
         }));
 });
 
@@ -75,7 +76,7 @@ gulp.task('html-move', function () {
             collapseWhitespace: true
         }))
         .pipe(gulp.dest('dist').on('end', function () {
-            console.log(fontColors.green, '\nMinifikacja i przenoszenie plików HTML zakończona\n');
+            console.log(fontColors.green, '\n✔ Minifikacja i przenoszenie plików HTML zakończona\n');
         }));
 });
 
@@ -85,7 +86,7 @@ gulp.task('tinypng', function () {
     return gulp.src('src/img/**/*')
         .pipe(tinypng(apiKey))
         .pipe(gulp.dest('dist/img')).on('end', function () {
-            console.log(fontColors.green, '\nKompresja obrazów zakończona\n');
+            console.log(fontColors.green, '\n✔ Kompresja obrazów zakończona\n');
             return gulp.src('.gulp', {
                     read: false
                 })
@@ -107,7 +108,7 @@ gulp.task('javascript', function () {
             loadMaps: true
         }))
         .pipe(uglify().on('end', function () {
-            console.log(fontColors.green, '\nŁączenie i minifikacja plików JavaScript zakończona\n');
+            console.log(fontColors.green, '\n✔ Łączenie i minifikacja plików JavaScript zakończona\n');
         }))
         .pipe(rename(outputFileNames.jsFile))
         .pipe(sourcemaps.write('./'))
@@ -126,7 +127,7 @@ gulp.task('js-move', function () {
             base: 'src/js/'
         })
         .pipe(gulp.dest('dist/js').on('end', function () {
-            console.log(fontColors.green, '\nPrzenoszenie plików JavaScript zakończone\n');
+            console.log(fontColors.green, '\n✔ Przenoszenie plików JavaScript zakończone\n');
         }));
 });
 
@@ -134,11 +135,12 @@ gulp.task('js-move', function () {
 gulp.task('build', ['html-move', 'css-move', 'js-move']);
 
 // Dane logowania do serwera FTP
-const ftpAccesses = JSON.parse(fs.readFileSync('dependencies/ftp_accesses.json'));
-const hostData = ftpAccesses.host;
-const userData = ftpAccesses.user;
-const passwordData = ftpAccesses.password;
-const hostDirectoryData = ftpAccesses.hostDirectory;
+const
+    ftpAccesses = JSON.parse(fs.readFileSync('dependencies/ftp_accesses.json')),
+    hostData = ftpAccesses.host,
+    userData = ftpAccesses.user,
+    passwordData = ftpAccesses.password,
+    hostDirectoryData = ftpAccesses.hostDirectory;
 
 // Kopiowanie plików z folderu produkcyjnego na serwer FTP
 gulp.task('ftp', function () {
@@ -154,6 +156,6 @@ gulp.task('ftp', function () {
         })
         .pipe(connect.newer(hostDirectoryData))
         .pipe(connect.dest(hostDirectoryData).on('end', function () {
-            console.log(fontColors.yellow, '\nKopiowanie plików na serwer FTP zakończone\n');
+            console.log(fontColors.yellow, '\n✔ Kopiowanie plików na serwer FTP zakończone\n');
         }));
 });
