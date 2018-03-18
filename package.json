@@ -1,7 +1,7 @@
 {
-    "name": "gulp_setup_for_sites_development",
+    "name": "gulp_setup_for_websites_development",
     "version": "1.0.0",
-    "description": "Simple Gulp setup for WWW sites develoment",
+    "description": "Simple Gulp setup for websites develoment",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
