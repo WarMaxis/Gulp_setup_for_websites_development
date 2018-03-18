@@ -1,0 +1,15 @@
+# Node.js modules
+node_modules/
+
+# CSS in src directory
+src/css/
+
+# dist directory
+dist/
+
+# dependencies directory (for example API Keys)
+dependencies/
+
+# Main .js file in src directory
+src/js/scripts.min.js
+src/js/scripts.min.js.map
