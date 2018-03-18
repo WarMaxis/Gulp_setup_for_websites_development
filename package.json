@@ -1,16 +1,16 @@
 {
-    "name": "projekt_k2",
+    "name": "gulp_setup_for_sites_development",
     "version": "1.0.0",
-    "description": "Projekt rekrutacyjny do działu WebDev K2",
+    "description": "Simple Gulp setup for WWW sites develoment",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
-    "K2"
+    "Gulp"
   ],
     "author": "Michał Milanowski",
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "browserify": "^14.0.0",
         "gulp": "^3.9.1",
